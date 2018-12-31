@@ -1,0 +1,68 @@
+prometheusOperator:
+  image:
+    repository: carlosedp/prometheus-operator
+    tag: v0.26.0
+  configmapReloadImage:
+    repository: carlosedp/configmap-reload
+    tag: v0.2.2
+  prometheusConfigReloaderImage:
+    repository: carlosedp/prometheus-config-reloader
+    tag: v0.26.0
+  hyperkubeImage:
+    repository: gcr.io/google-containers/hyperkube-arm
+    tag: v1.13.0
+prometheus:
+  prometheusSpec:
+    image:
+      repository: carlosedp/prometheus
+      tag: v2.6.0
+    storageSpec:
+      class: ""
+      selector:
+        matchLabels:
+          app: prometheus
+      resources: {}
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteMany
+          resources:
+            requests:
+              storage: 50Gi
+        selector:
+          matchLabels:
+            app: prometheus
+alertmanager:
+  alertmanagerSpec:
+    image:
+      repository: carlosedp/alertmanager
+      tag: v0.15.3
+    storage:
+      class: ""
+      selector:
+        matchLabels:
+          app: alertmanager
+      resources: {}
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteMany
+          resources:
+            requests:
+              storage: 10Gi
+        selector:
+          matchLabels:
+            app: alertmanager
+prometheus-node-exporter:
+  image:
+    repository: carlosedp/node_exporter
+    tag: v0.17.0
+kube-state-metrics:
+  image:
+    repository: carlosedp/kube-state-metrics
+    tag: v1.4.0
+grafana:
+  enabled: false
+  image:
+    repository: carlosedp/monitoring-grafana
+    tag: v5.4.2

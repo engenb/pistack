@@ -1,0 +1,1 @@
+helm init --force-upgrade --tiller-image=jessestuart/tiller:v2.12.1

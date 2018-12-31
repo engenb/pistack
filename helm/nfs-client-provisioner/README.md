@@ -1,0 +1,1 @@
+helm install --name external-storage -f values.yaml stable/nfs-client-provisioner

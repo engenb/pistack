@@ -1,0 +1,6 @@
+image:
+  repository: carlosedp/monitoring-grafana
+  tag: v5.4.2
+persistence:
+  enabled: true
+  
