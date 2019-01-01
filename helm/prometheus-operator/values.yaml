@@ -53,6 +53,10 @@ alertmanager:
         selector:
           matchLabels:
             app: alertmanager
+  config:
+    global:
+      smtp_smarthost: smtp.mailgun.org:25
+      smtp_from: "Prometheus Alerting <noreply+prometheus-alerting@pistack.io>"
 prometheus-node-exporter:
   image:
     repository: carlosedp/node_exporter
