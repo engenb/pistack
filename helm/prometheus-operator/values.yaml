@@ -55,18 +55,28 @@ alertmanager:
             app: alertmanager
   config:
     global:
-      smtp_smarthost: smtp.mailgun.org:25
+      smtp_smarthost: smtp.mailgun.org:587
       smtp_from: "Prometheus Alerting <noreply+prometheus-alerting@pistack.io>"
-prometheus-node-exporter:
-  image:
-    repository: carlosedp/node_exporter
-    tag: v0.17.0
-kube-state-metrics:
-  image:
-    repository: carlosedp/kube-state-metrics
-    tag: v1.4.0
+    route:
+      receiver: default
+      routes:
+      - receiver: default
+        match:
+          alertname: DeadMansSwitch
+coreDns:
+  enabled: false
+kubeDns:
+  enabled: true
 grafana:
   enabled: false
   image:
     repository: carlosedp/monitoring-grafana
     tag: v5.4.2
+kube-state-metrics:
+  image:
+    repository: carlosedp/kube-state-metrics
+    tag: v1.4.0
+prometheus-node-exporter:
+  image:
+    repository: carlosedp/node_exporter
+    tag: v0.17.0
