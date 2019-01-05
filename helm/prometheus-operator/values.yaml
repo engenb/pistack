@@ -16,6 +16,8 @@ prometheus:
     image:
       repository: carlosedp/prometheus
       tag: v2.6.0
+    secrets:
+    - etcd-client-certs
     storageSpec:
       class: ""
       selector:
@@ -94,6 +96,9 @@ kubeEtcd:
       component: etcd
   serviceMonitor:
     scheme: https
+    caFile: /etc/prometheus/secrets/etcd-client-certs/ca.crt
+    certFile: /etc/prometheus/secrets/etcd-client-certs/etcd-client.crt
+    keyFile: /etc/prometheus/secrets/etcd-client-certs/etcd-client.key
 grafana:
   enabled: false
   image:
